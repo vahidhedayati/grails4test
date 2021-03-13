@@ -2,18 +2,19 @@ package testgg
 
 import enums.security.RoleType
 import enums.security.UserType
+import enums.student.DegreeType
 import grails.gorm.transactions.Transactional
 import org.grails.datastore.gorm.GormEntity
 import uni.course.Course
 import uni.security.Role
 import uni.security.User
 import uni.security.UserRole
+import uni.student.Student
+import uni.student.StudentCourse
+import uni.tutor.Tutor
+import uni.tutor.TutorCourse
 
 import java.text.SimpleDateFormat
-import java.time.LocalDateTime
-import java.time.LocalTime
-import java.time.MonthDay
-import java.time.format.DateTimeFormatter
 
 class BootStrap {
 
@@ -22,6 +23,8 @@ class BootStrap {
     def init = { servletContext ->
         initSecurity()
         initCourse()
+        initStudent()
+        initTutor()
     }
     def destroy = {
     }
@@ -104,6 +107,40 @@ class BootStrap {
             course.save(FAIL_ON_ERROR)
         }
         log.debug 'Finish init courses'
+    }
+
+
+    @Transactional
+    private initStudent() {
+        log.debug 'student init'
+
+        Student student = new Student(
+                firstName: 'John',
+                lastName: 'Smith',
+                birthDate: getDateFromString("2000-09-01"),
+                user: User.findByUsername('student'),
+                degreeType: DegreeType.BACHELOR
+        )
+        setDefaultFields(student)
+        student.save(FAIL_ON_ERROR)
+        StudentCourse.create(student, Course.first())
+        log.debug 'student init end'
+    }
+
+    @Transactional
+    private initTutor() {
+        log.debug 'Start init mentor'
+
+        Tutor tutor = new Tutor(
+                firstName: 'Clogg',
+                lastName: 'Clever',
+                birthDate: getDateFromString("1974-09-01"),
+                user: User.findByUsername('tutor')
+        )
+        setDefaultFields(tutor)
+        tutor.save(FAIL_ON_ERROR)
+        TutorCourse.create(tutor, Course.first())
+        log.debug 'tutor init end'
     }
 
     /**

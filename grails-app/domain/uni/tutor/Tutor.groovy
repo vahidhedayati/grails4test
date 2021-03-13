@@ -17,5 +17,6 @@ class Tutor {
     }
 
     static constraints = {
+        middleName nullable:true
     }
 }

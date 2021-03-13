@@ -1,4 +1,5 @@
-
+//security will remain on - rules will be added fruther down
+//grails.plugin.springsecurity.active = false
 
 // Added by the Spring Security Core plugin:
 grails.plugin.springsecurity.userLookup.userDomainClassName = 'uni.security.User'
@@ -14,7 +15,9 @@ grails.plugin.springsecurity.controllerAnnotations.staticRules = [
 	[pattern: '/**/js/**',       access: ['permitAll']],
 	[pattern: '/**/css/**',      access: ['permitAll']],
 	[pattern: '/**/images/**',   access: ['permitAll']],
-	[pattern: '/**/favicon.ico', access: ['permitAll']]
+	[pattern: '/**/favicon.ico', access: ['permitAll']],
+	[pattern: '/student/**',       access: ['permitAll']],
+	[pattern: '/tutor/**',       access: ['permitAll']],
 ]
 
 grails.plugin.springsecurity.filterChain.chainMap = [

@@ -17,11 +17,6 @@ class Student {
     User user
     DegreeType degreeType
 
-    String institutionName
-    String speciality
-
-    String email
-    String phone
 
     Date dateCreated
     Date lastUpdated
@@ -36,5 +31,16 @@ class Student {
 
 
     static constraints = {
+        middleName nullable:true
     }
+
+    /*
+    String toString() {
+        return """Student {
+            name: ${firstName} ${lastName},
+            firstName: ${birthDate}
+        }"""
+    }
+
+     */
 }
