@@ -24,6 +24,11 @@ abstract class TutorService implements TutorInterfaceService {
     Map<Course,List<Student>> getStudentsFromTutor(Tutor tutor) {
         String query = "from StudentCourse where course in :courses"
         def executedQuery = StudentCourse.executeQuery(query,[courses:tutor.courses],[max:-1, readOnly:true]) as Set<Student>
-        return executedQuery.groupBy{ StudentCourse sc -> sc.course }
+        Map<Course,List<StudentCourse>> res1 =  executedQuery.groupBy{ StudentCourse sc -> sc.course }
+        Map<Course,List<Student>> results = [:]
+        res1?.each {k,v ->
+            results."${k}" = v*.student
+        }
+        return results
     }
 }
