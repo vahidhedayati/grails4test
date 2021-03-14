@@ -34,13 +34,12 @@ class Student {
         middleName nullable:true
     }
 
+
     /*
     String toString() {
         return """Student {
-            name: ${firstName} ${lastName},
-            firstName: ${birthDate}
+            name: ${firstName} ${lastName}
         }"""
     }
-
      */
 }

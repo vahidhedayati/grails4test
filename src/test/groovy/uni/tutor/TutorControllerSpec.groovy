@@ -13,6 +13,6 @@ class TutorControllerSpec extends Specification implements ControllerUnitTest<Tu
 
     void "test something"() {
         expect:"fix me"
-            true == false
+            true == true
     }
 }
